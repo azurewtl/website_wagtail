@@ -24,8 +24,15 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    'blog',
+    'wagtailmd',
     'home',
     'search',
+    'el_pagination',
+    'widget_tweaks',
+    'wagtail.contrib.modeladmin',  # Don't repeat if it's there already
+    "wagtail.contrib.routable_page",
+    'wagtailmenus',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -78,6 +85,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # wagtailmenus plugin
+                'wagtailmenus.context_processors.wagtailmenus',
             ],
         },
     },
@@ -121,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

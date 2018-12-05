@@ -3,3 +3,4 @@ lib
 include
 .DS_Store
 *.pyc
+.vscode
