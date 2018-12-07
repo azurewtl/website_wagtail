@@ -29,7 +29,6 @@ from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import Tag as TaggitTag
 from taggit.models import TaggedItemBase
-from wagtailmd.utils import MarkdownField, MarkdownPanel
 
 
 class BlogPage(RoutablePageMixin, Page):
@@ -104,11 +103,9 @@ class BlogPage(RoutablePageMixin, Page):
 
 
 class PostPage(Page):
-    body = MarkdownField()
+    body = RichTextField()
     date = models.DateTimeField(verbose_name="Post date", default=datetime.datetime.today)
-    excerpt = MarkdownField(
-        verbose_name='excerpt', blank=True,
-    )
+    excerpt = RichTextField(verbose_name='excerpt', blank=True)
 
     header_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -122,8 +119,8 @@ class PostPage(Page):
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('header_image'),
-        MarkdownPanel("body"),
-        MarkdownPanel("excerpt"),
+        FieldPanel("body"),
+        FieldPanel("excerpt"),
         FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         FieldPanel('tags'),
     ]
@@ -217,9 +214,9 @@ class FormPage(AbstractEmailForm):
         context = super(FormPage, self).get_context(request, *args, **kwargs)
         context['blog_page'] = self.blog_page
         return context
-    # function not used
-    # def get_form_fields(self):
-    #     return self.custom_form_fields.all()
+
+    def get_form_fields(self):
+        return self.custom_form_fields.all()
 
     @property
     def blog_page(self):
