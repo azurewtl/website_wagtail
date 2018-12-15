@@ -8,12 +8,8 @@
 {% block content %}
 <div class=col-md-12>
 
-    <h1>Search</h1>
+    <h1>Search Result</h1>
 
-    <form action="{% url 'search' %}" method="get">
-        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search" class="button">
-    </form>
 
     {% if search_results %}
 
@@ -48,8 +44,11 @@
         {% if search_results.has_next %}
             <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
         {% endif %}
-    {% elif search_query %}
-        No results found
+        
+    {% else %}
+        <div class="alert alert-primary">
+            <h5>啥都没找到...</h5>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

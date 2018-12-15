@@ -2,7 +2,7 @@ Django>=2.1,<2.2
 wagtail>=2.3,<2.4
 django-taggit==0.23.0
 django-el-pagination==3.1.0
-wagtailmenus==2.8
+wagtailmenus==2.12
 django-widget-tweaks==1.4.2
 isort==4.3.4
 flake8==3.5.0

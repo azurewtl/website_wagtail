@@ -8,8 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>{% block title %}{{ self.title }}{% if self.description %} | {{ self.description }}{% endif %}{% endblock
-    title %}</title>
+  <title>{% block title %}{{ self.title }}{% if self.description %} | {{ self.description }}{% endif %}{% endblock title %}</title>
   <meta name="description" content="{% block meta_description %}{{ blog_page.search_description }}{% endblock meta_description %}" />
 
   <link rel="canonical" href="{% block canonical %}{% canonical_url %}{% endblock canonical %}" />
@@ -23,7 +22,6 @@
   <!-- Custom styles for this template -->
   <link href="{% static 'blog/css/blog-home4.css' %}" rel="stylesheet">
 
-  <link href="{% static 'blog/css/default.css' %}" rel="stylesheet">
 
 </head>
 
@@ -32,7 +30,7 @@
   {% wagtailuserbar %}
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top py-3">
     <div class="container">
       <a class="navbar-brand" href="/">AZURE</a>
 
@@ -42,14 +40,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         {% main_menu template="menu/main_menu.html" %}
-        <form role="search" method="get" class="form-search" action="">
-          <div class="input-group">
-            <input type="text" class="form-control search-query" name="q" placeholder="Search&hellip;" title="Search for:" />
-            <span class="input-group-btn">
-              <button class="btn btn-dark" type="button">Go!</button>
+
+        <form class="ml-md-auto" action="{% url 'search' %}" method="get">
+          <div class="input-group input-group">
+            <input type="text" class="border-0 pl-3 form-control" placeholder="Search" style="border-radius: 5em 0em 0em 5em"
+            name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
+
+            <span class="input-group-append">
+              <button class="btn" style="border-radius: 0em 5em 5em 0em" type="submit"> 
+                <i class="fas fa-search pr-1 text-secondary"></i>
+              </button>
             </span>
+
           </div>
         </form>
+
       </div>
 
     </div>
@@ -75,10 +80,6 @@
 
   <!-- Bootstrap Core JavaScript -->
   <script src="{% static 'blog/js/bootstrap.bundle.min.js' %}"></script>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39890589-7"></script>
-
 
 </body>
 
